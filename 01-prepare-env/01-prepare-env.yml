@@ -49,6 +49,12 @@
   - name: Copy dockercmds.h in /etc/profile.d
     copy: src=dockercmds.sh dest=/etc/profile.d/ mode="a+x"
 
+  - name: Create docker volume /volumes/mesos-master_1-logs
+    file: path=/volumes/mesos-master_1-logs state=directory owner=1 group=1
+
+  - name: Create docker volume /volumes/mesos-slave_1-logs
+    file: path=/volumes/logs/mesos-slave_1-logs state=directory owner=1 group=1
+
   # POSTPONED
   #- name: Allow docker network routing
   #  iptables: chain=DOCKER protocol=tcp jump=ACCEPT
