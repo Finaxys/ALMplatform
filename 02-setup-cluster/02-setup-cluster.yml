@@ -14,7 +14,7 @@ mesos_master:
   links:
   - zookeeper
   volumes:
-  - /data/logs/mesos-master:/tmp/logs/master_log
+  - /volumes/mesos-master_1-logs:/tmp/logs/master_log
   environment:
     MESOS_HOSTNAME: 0.0.0.0
     MESOS_IP: 0.0.0.0
@@ -33,7 +33,7 @@ mesos_slave:
   - /var/run/docker.sock:/var/run/docker.sock
   - /sys:/sys:ro
   - /cgroup:/cgroup:ro
-  - /data/logs/mesos-slave:/tmp/logs/slave_log
+  - /volumes/logs/mesos-slave_1-logs:/tmp/logs/slave_log
   container_name: mesos_slave
   environment:
     MESOS_HOSTNAME: 'mesos_master'
