@@ -1,4 +1,5 @@
-# ALM platform setup (root account)  
+# ALM platform setup
+Prerequisites : Centos 7 distribution with sudo root privileges account    
   
 ## System preparation  
 - Install Ansible and Git tools (boostraping) 
@@ -11,7 +12,7 @@ EOF
 ```  
 - Set up the system configuration using Ansible (users/services/storage setup)
 ```  
-git pull https://github.com/Finaxys/ALMplatform  
+git clone https://github.com/Finaxys/ALMplatform  
 cd ALMplatform  
 ansible-playbook -i 01-prepare-env/host.ansible 01-prepare-env/01-prepare-env.yml  
 ```  
