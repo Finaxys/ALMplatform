@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
-  remote_user: sguclu
-  sudo: yes
+  remote_user: no
+  sudo: no
   tasks:
 
   - name: Install wget for next steps
@@ -28,8 +28,8 @@
   - name: Patch the docker issue https://github.com/docker/docker/issues/17653
     lineinfile: dest=/usr/lib/systemd/system/docker.service state=present regexp=^ExecStart= line="ExecStart=/usr/bin/docker daemon --exec-opt native.cgroupdriver=cgroupfs -H fd://"
 
-  - name : Create the traineegrp user
-    user: name=traineegrp groups="docker" password=$6$W7ZiPYhU$We1NsDUTeYLe3NR/o7u.XScPIt.l8zYWLnpuBc1CddTuL0tXjItjajOAypSuNqA70IMMAgLvi/WB23b.j.WgK1
+  - name : Create the almbox  user
+    user: name=almbox groups="docker" password=$6$W7ZiPYhU$We1NsDUTeYLe3NR/o7u.XScPIt.l8zYWLnpuBc1CddTuL0tXjItjajOAypSuNqA70IMMAgLvi/WB23b.j.WgK1
 
   - name: Create docker volume /volumes/sonar/data
     file: path=/volumes/sonar/data state=directory owner=1000 group=1000
@@ -49,6 +49,6 @@
   - name: Copy dockercmds.h in /etc/profile.d
     copy: src=dockercmds.sh dest=/etc/profile.d/ mode="a+x"
 
-  # POST-PONED
+  # POSTPONED
   #- name: Allow docker network routing
   #  iptables: chain=DOCKER protocol=tcp jump=ACCEPT
