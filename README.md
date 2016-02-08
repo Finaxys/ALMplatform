@@ -1,7 +1,7 @@
 # ALM platform setup
 Prerequisites : Centos 7 distribution with sudo root privileges account    
   
-## System preparation  
+## System preparation
 - Install Ansible and Git tools (boostraping) 
 ```  
 sudo -s -- << EOF  
@@ -9,20 +9,28 @@ rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarc
 yum -y update  
 yum -y install ansible git  
 EOF
-```  
-- Set up the system configuration using Ansible (users/services/storage setup)
+``` 
+- Get configuration project  
 ```  
 git clone https://github.com/Finaxys/ALMplatform  
 cd ALMplatform  
-ansible-playbook -i 01-prepare-env/host.ansible 01-prepare-env/01-prepare-env.yml  
+```  
+- Set up the system configuration using Ansible (users/services/storage setup)  
+```  
+sudo ansible-playbook -i 01-prepare-env/host.ansible 01-prepare-env/01-prepare-env.yml  
 ```  
   
-## Set up the Marathon/Mesos/Zookeeper cluster  
+## Setup Marathon/Mesos/Zookeeper cluster  
 ```  
-sudo -u almbox -s -- << EOF  
-docker-compose -f 02-setup-cluster/02-setup-cluster.yml up -d
-EOF  
+sudo docker-compose 02-setup-cluster  
 ```  
   
-- 03-run-services  
+## Build software factory stack  
+```  
+TODO : docker-compose in 03-run-services mounting the software factory stack (XLDeploy?)
+```  
   
+## Run software factory stack  
+```  
+TODO : call mesos frameworks based on build docker images and see...
+```  
