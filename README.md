@@ -16,11 +16,13 @@ git clone https://github.com/Finaxys/ALMplatform
 cd ALMplatform  
 ansible-playbook -i 01-prepare-env/host.ansible 01-prepare-env/01-prepare-env.yml  
 ```  
+  
 ## Set up the Marathon/Mesos/Zookeeper cluster  
 ```  
-  
+sudo -u almbox -s -- << EOF  
+docker-compose -f 02-setup-cluster/02-setup-cluster.yml up  
+EOF  
 ```  
   
-- 02-setup-cluster  
 - 03-run-services  
   
