@@ -49,5 +49,6 @@
   - name: Copy dockercmds.h in /etc/profile.d
     copy: src=dockercmds.sh dest=/etc/profile.d/ mode="a+x"
 
-  - name: Allow docker network routing
-    iptables: chain=DOCKER protocol=tcp jump=ACCEPT
+  # POST-PONED
+  #- name: Allow docker network routing
+  #  iptables: chain=DOCKER protocol=tcp jump=ACCEPT
