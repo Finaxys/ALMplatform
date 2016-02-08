@@ -55,6 +55,8 @@
   - name: Create docker volume /volumes/mesos-slave_1-logs
     file: path=/volumes/logs/mesos-slave_1-logs state=directory owner=1 group=1
 
-  # POSTPONED
-  #- name: Allow docker network routing
-  #  iptables: chain=DOCKER protocol=tcp jump=ACCEPT
+  - name: Allow docker network routing
+    shell: "iptables -A DOCKER -p tcp -j ACCEPT"
+
+  - name: Persist iptables
+    shell: "iptables-save > /etc/sysconfig/iptables"
