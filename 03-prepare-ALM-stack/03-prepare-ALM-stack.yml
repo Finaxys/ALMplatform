@@ -11,7 +11,7 @@ cinode:
   - qualitynode
   - binarynode
 
-nexus:
+binarynode:
   image: "sonatype/nexus:2.11.2-06"
   ports:
    - "8081:8081"
@@ -19,7 +19,7 @@ nexus:
    - /volumes/nexus:/sonatype-work
   container_name: binarynode
  
-sonar:
+qualitynode:
   image: "sonarqube:5.2"
   ports:
    - "9000:9000"
