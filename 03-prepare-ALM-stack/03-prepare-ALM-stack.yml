@@ -1,0 +1,30 @@
+jenkins:
+  build: ./01-custom-jenkins
+  ports:
+   - "8080:8080"
+  volumes:
+   - /volumes/jenkins:/var/jenkins_home
+   - /var/run/docker.sock:/var/run/docker.sock
+  container_name: cinode
+  privileged: true
+  links:
+  - qualitynode
+  - binarynode
+
+nexus:
+  image: "sonatype/nexus:2.11.2-06"
+  ports:
+   - "8081:8081"
+  volumes:
+   - /volumes/nexus:/sonatype-work
+  container_name: binarynode
+ 
+sonar:
+  image: "sonarqube:5.2"
+  ports:
+   - "9000:9000"
+   - "9092:9092"
+  container_name: qualitynode
+  volumes:
+   - /volumes/sonar/data:/opt/sonarqube/data
+   - /volumes/sonar/extensions:/opt/sonarqube/extensions
