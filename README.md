@@ -22,12 +22,12 @@ sudo ansible-playbook -i 01-prepare-env/host.ansible 01-prepare-env/01-prepare-e
   
 ### Setup Marathon/Mesos/Zookeeper cluster  
 ```  
- sudo docker-compose -f 02-setup-cluster/02-setup-cluster.yml up -d  
+sudo docker-compose -f 02-setup-cluster/02-setup-cluster.yml up -d  
 ```  
   
 ### Build software factory stack  
 ```  
-TODO : docker-compose in 03-run-services mounting the software factory stack (XLDeploy?)
+sudo docker-compose -f 03-prepare-ALM-stack/03-prepare-ALM-stack.yml build  
 ```  
   
 ### Run software factory stack  
