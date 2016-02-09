@@ -1,7 +1,7 @@
-# ALM platform setup
+## ALM platform setup
 Prerequisites : Centos 7 distribution with sudo root privileges account    
   
-## System preparation
+### System preparation
 - Install Ansible and Git tools (boostraping) 
 ```  
 sudo -s -- << EOF  
@@ -20,17 +20,17 @@ cd ALMplatform
 sudo ansible-playbook -i 01-prepare-env/host.ansible 01-prepare-env/01-prepare-env.yml  
 ```  
   
-## Setup Marathon/Mesos/Zookeeper cluster  
+### Setup Marathon/Mesos/Zookeeper cluster  
 ```  
- sudo docker-compose -f 02-setup-cluster/02-setup-cluster.yml up  
+ sudo docker-compose -f 02-setup-cluster/02-setup-cluster.yml up -d  
 ```  
   
-## Build software factory stack  
+### Build software factory stack  
 ```  
 TODO : docker-compose in 03-run-services mounting the software factory stack (XLDeploy?)
 ```  
   
-## Run software factory stack  
+### Run software factory stack  
 ```  
 TODO : call mesos frameworks based on build docker images and see...
 ```  
