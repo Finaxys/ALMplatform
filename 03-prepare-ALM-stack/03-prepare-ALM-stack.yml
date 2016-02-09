@@ -1,4 +1,4 @@
-jenkins:
+cinode:
   build: ./01-custom-jenkins
   ports:
    - "8080:8080"
