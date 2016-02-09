@@ -49,6 +49,9 @@
   - name: Copy dockercmds.h in /etc/profile.d
     copy: src=dockercmds.sh dest=/etc/profile.d/ mode="a+x"
 
+  - name: Copy docker client for mesos slave startup
+    copy: src=docker-1.6.2-client dest=/volumes/docker-1.6.2-client mode="a+x"
+
   - name: Create docker volume /volumes/mesos-master_1-logs
     file: path=/volumes/mesos-master_1-logs state=directory owner=1 group=1
 
