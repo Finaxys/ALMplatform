@@ -7,7 +7,7 @@ zookeeper:
   container_name: zookeeper
 
 mesos_master:
-  image: "mesosphere/mesos-master:0.26.0-0.2.145.ubuntu1404"
+  image: "mesosphere/mesos-master:0.27.0-0.2.190.ubuntu1404"
   ports:
    - "5050:5050"
   container_name: mesos_master
@@ -26,16 +26,17 @@ mesos_master:
   privileged: true
 
 mesos_slave:
-  image: "mesosphere/mesos-slave:0.26.0-0.2.145.ubuntu1404"
+  image: "mesosphere/mesos-slave:0.22.0-1.0.ubuntu1404"
   ports:
    - "8081:8081"
   volumes:
   - /var/run/docker.sock:/var/run/docker.sock
-  - /usr/bin/docker:/usr/bin/docker
+  - docker-1.6.2-client:/usr/bin/docker:ro
   - /sys:/sys:ro
   - /cgroup:/cgroup:ro
   - /volumes/logs/mesos-slave_1-logs:/tmp/logs/slave_log
-  command: "--launcher=posix"
+  #command: "--launcher=posix"
+  #privileged: true
   container_name: mesos_slave
   environment:
     MESOS_HOSTNAME: 'mesos_master'
