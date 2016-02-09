@@ -22,7 +22,7 @@ sudo ansible-playbook -i 01-prepare-env/host.ansible 01-prepare-env/01-prepare-e
   
 ## Setup Marathon/Mesos/Zookeeper cluster  
 ```  
-sudo docker-compose 02-setup-cluster  
+ sudo docker-compose -f 02-setup-cluster/02-setup-cluster.yml up  
 ```  
   
 ## Build software factory stack  
