@@ -46,8 +46,11 @@
   - name: Create docker volume /volumes/jenkins
     file: path=/volumes/jenkins state=directory owner=1000 group=1000
 
-  - name: Create docker volume /volumes/nexus
-    file: path=/volumes/nexus state=directory owner=200 group=200
+  - name: Create docker volume /volumes/nexus/work
+    file: path=/volumes/nexus/work state=directory owner=200 group=200
+
+  - name: Create docker volume /volumes/nexus/conf
+    file: path=/volumes/nexus/conf state=directory owner=200 group=200
 
   - name: Create docker volume /volumes/elk
     file: path=/volumes/elk state=directory owner=103 group=107
