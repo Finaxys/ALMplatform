@@ -20,11 +20,28 @@ binarynode:
   container_name: binarynode
  
 qualitynode:
-  image: "sonarqube:5.2"
+  image: "sonarqube:4.5.6"
   ports:
    - "9000:9000"
    - "9092:9092"
   container_name: qualitynode
   volumes:
    - /volumes/sonar/data:/opt/sonarqube/data
+   - /volumes/sonar/ssl:/opt/sonarqube/ssl
+   - /volumes/sonar/conf:/opt/sonarqube/conf
    - /volumes/sonar/extensions:/opt/sonarqube/extensions
+  environment:
+  - SONARQUBE_JDBC_URL=jdbc:mysql://sonardbnode:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
+  links:
+  - sonardbnode
+
+sonardbnode:
+  image: "mysql:5.7"
+  ports: 
+  - "3306:3306"
+  container_name: sonardbnode
+  command: "--skip-grant-tables"
+  volumes:
+  - /volumes/sonar/mysql:/var/lib/mysql
+
+

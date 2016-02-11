@@ -34,9 +34,15 @@
   - name: Create docker volume /volumes/sonar/data
     file: path=/volumes/sonar/data state=directory owner=1000 group=1000
 
+  - name: Create docker volume /volumes/sonar/conf
+    file: path=/volumes/sonar/conf state=directory owner=1000 group=1000
+
   - name: Create docker volume /volumes/sonar/extensions
     file: path=/volumes/sonar/extensions state=directory owner=1000 group=1000
 
+  - name: Create docker volume /volumes/sonar/mysql
+    file: path=/volumes/sonar/mysql state=directory owner=999 group=999
+ 
   - name: Create docker volume /volumes/jenkins
     file: path=/volumes/jenkins state=directory owner=1000 group=1000
 
