@@ -44,7 +44,7 @@
     file: path=/volumes/sonar/mysql state=directory owner=999 group=999
  
   - name: Create docker volume /volumes/jenkins
-    file: path=/volumes/jenkins state=directory owner=1000 group=1000
+    file: path=/volumes/jenkins/home state=directory owner=1000 group=1000
 
   - name: Create docker volume /volumes/nexus/work
     file: path=/volumes/nexus/work state=directory owner=200 group=200

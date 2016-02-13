@@ -1,9 +1,13 @@
 cinode:
   build: ./01-custom-jenkins
   ports:
-   - "8080:8080"
+   - "18443:8443"
+  environment:
+   #- JAVA_OPTS="-Xmx8192m"
+   - JENKINS_OPTS=--httpPort=-1 --httpsPort=8443 --httpsCertificate=/var/jenkins_home/ssl/cert.cinode.cer --httpsPrivateKey=/var/jenkins_home/ssl/key.cinode_unencrypted.cer
   volumes:
-   - /volumes/jenkins:/var/jenkins_home
+   - /volumes/jenkins/home:/var/jenkins_home
+   - /volumes/jenkins/ssl:/var/jenkins_home/ssl
    - /var/run/docker.sock:/var/run/docker.sock
   container_name: cinode
   privileged: true
@@ -20,6 +24,7 @@ binarynode:
    - nexus.log-config-dir=/opt/sonatype/nexus/conf
   volumes:
    - /volumes/nexus/conf:/opt/sonatype/nexus/conf
+   - /volumes/nexus/ssl:/opt/sonatype/nexus/conf/ssl
    - /volumes/nexus/work:/sonatype-work
    - /volumes/nexus/wrapper.conf:/opt/sonatype/nexus/bin/jsw/conf/wrapper.conf
   container_name: binarynode
@@ -27,8 +32,7 @@ binarynode:
 qualitynode:
   image: "sonarqube:4.5.6"
   ports:
-   - "9000:9000"
-   - "9092:9092"
+   - "19000:9000"
   container_name: qualitynode
   volumes:
    - /volumes/sonar/data:/opt/sonarqube/data
@@ -42,9 +46,8 @@ qualitynode:
 
 sonardbnode:
   image: "mysql:5.7"
-  # PORT UNEXPOSED - ONLY AVAILABLE FOR CONTAINERS
-  # ports: 
-  # - "3306:3306"
+  ports: 
+   - "13306:3306"
   container_name: sonardbnode
   command: "--skip-grant-tables"
   volumes:

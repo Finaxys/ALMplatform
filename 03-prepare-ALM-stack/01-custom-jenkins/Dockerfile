@@ -19,3 +19,4 @@ RUN apt-get install -y docker-engine && \
 
 # GET BACK TO STANDARD USER
 USER jenkins
+
