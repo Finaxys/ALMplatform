@@ -15,9 +15,13 @@ binarynode:
   image: "sonatype/nexus:2.11.2-06"
   ports:
    - "18081:8081"
-#  volumes:
-#   - /volumes/nexus/conf:/opt/sonatype/nexus/conf
-#   - /volumes/nexus/work:/sonatype-work
+  environment:
+   - LAUNCHER_CONF=conf/jetty-https.xml
+   - nexus.log-config-dir=/opt/sonatype/nexus/conf
+  volumes:
+   - /volumes/nexus/conf:/opt/sonatype/nexus/conf
+   - /volumes/nexus/work:/sonatype-work
+   - /volumes/nexus/wrapper.conf:/opt/sonatype/nexus/bin/jsw/conf/wrapper.conf
   container_name: binarynode
  
 qualitynode:
