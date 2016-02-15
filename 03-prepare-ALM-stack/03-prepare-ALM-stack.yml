@@ -3,11 +3,11 @@ cinode:
   ports:
    - "18443:8443"
   environment:
-   #- JAVA_OPTS="-Xmx8192m"
    - JENKINS_OPTS=--httpPort=-1 --httpsPort=8443 --httpsCertificate=/var/jenkins_home/ssl/cert.cinode.cer --httpsPrivateKey=/var/jenkins_home/ssl/key.cinode_unencrypted.cer
   volumes:
    - /volumes/jenkins/home:/var/jenkins_home
    - /volumes/jenkins/ssl:/var/jenkins_home/ssl
+   - /volumes/jenkins/tools:/var/jenkins_home/almtools
    - /var/run/docker.sock:/var/run/docker.sock
   container_name: cinode
   privileged: true
@@ -22,6 +22,8 @@ binarynode:
   environment:
    - LAUNCHER_CONF=conf/jetty-https.xml
    - nexus.log-config-dir=/opt/sonatype/nexus/conf
+   - CONTEXT_PATH=/nexus
+   - MAX_HEAP=1G
   volumes:
    - /volumes/nexus/conf:/opt/sonatype/nexus/conf
    - /volumes/nexus/ssl:/opt/sonatype/nexus/conf/ssl
