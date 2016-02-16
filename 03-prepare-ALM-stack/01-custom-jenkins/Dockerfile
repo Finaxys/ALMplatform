@@ -4,7 +4,7 @@ FROM jenkins:1.625.3
 USER root
  
 # MODULES INSTALL : GIT, PROTOBUF, PUPPET, SUDO
-RUN apt-get update && apt-get install -y git protobuf-compiler apt-transport-https sudo wget telnet vim
+RUN apt-get update && apt-get install -y git protobuf-compiler apt-transport-https sudo wget telnet vim vagrant
 
 # DOCKER REPOS SETUP - YEAH, DOCKER IN DOCKER ;)
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
