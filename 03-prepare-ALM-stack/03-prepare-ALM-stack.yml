@@ -13,6 +13,7 @@ cinode:
   privileged: true
   links:
   - qualitynode
+  - sonardbnode
   - binarynode
 
 binarynode:
@@ -51,6 +52,6 @@ sonardbnode:
   ports: 
    - "13306:3306"
   container_name: sonardbnode
-  command: "--skip-grant-tables"
+  #command: "--skip-grant-tables"
   volumes:
   - /volumes/sonar/mysql:/var/lib/mysql
