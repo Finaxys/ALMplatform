@@ -53,7 +53,6 @@ sonardbnode:
   ports: 
    - "13306:3306"
   container_name: sonardbnode
-  #command: "--skip-grant-tables"
   volumes:
   - /volumes/sonar/mysql:/var/lib/mysql
 
@@ -61,9 +60,7 @@ deploynode:
   build: ./02-custom-xldeploy
   ports:
    - "14516:4516"
+  hostname: deploynode
   volumes:
-   - /volumes/xldeploy/ssl:/ALMBOX/ssl
-   - /volumes/xldeploy/scripts:/ALMBOX/scripts
-   - /volumes/xldeploy/products:/ALMBOX/products
-   - /volumes/xldeploy/data:/ALMBOX/data
+   - /volumes/xldeploy:/ALMBOX
   container_name: deploynode
