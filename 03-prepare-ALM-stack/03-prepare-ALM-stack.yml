@@ -15,6 +15,7 @@ cinode:
   - qualitynode
   - sonardbnode
   - binarynode
+  - deploynode
 
 binarynode:
   image: "sonatype/nexus:2.11.2-06"
@@ -55,3 +56,14 @@ sonardbnode:
   #command: "--skip-grant-tables"
   volumes:
   - /volumes/sonar/mysql:/var/lib/mysql
+
+deploynode:
+  build: ./02-custom-xldeploy
+  ports:
+   - "14516:4516"
+  volumes:
+   - /volumes/xldeploy/ssl:/ALMBOX/ssl
+   - /volumes/xldeploy/scripts:/ALMBOX/scripts
+   - /volumes/xldeploy/products:/ALMBOX/products
+   - /volumes/xldeploy/data:/ALMBOX/data
+  container_name: deploynode
