@@ -2,6 +2,8 @@ cinode:
   build: ./01-custom-jenkins
   ports:
    - "18443:8443"
+  hostname: cinode
+  container_name: cinode
   environment:
    - JENKINS_OPTS=--httpPort=-1 --httpsPort=8443 --httpsCertificate=/var/jenkins_home/ssl/cert.cinode.cer --httpsPrivateKey=/var/jenkins_home/ssl/key.cinode_unencrypted.cer
   volumes:
@@ -9,7 +11,6 @@ cinode:
    - /volumes/jenkins/ssl:/var/jenkins_home/ssl
    - /volumes/jenkins/tools:/var/jenkins_home/almtools
    - /var/run/docker.sock:/var/run/docker.sock
-  container_name: cinode
   privileged: true
   links:
   - qualitynode
@@ -21,6 +22,8 @@ binarynode:
   image: "sonatype/nexus:2.11.2-06"
   ports:
    - "18081:8081"
+  hostname: binarynode
+  container_name: binarynode
   environment:
    - LAUNCHER_CONF=conf/jetty-https.xml
    - nexus.log-config-dir=/opt/sonatype/nexus/conf
@@ -31,20 +34,20 @@ binarynode:
    - /volumes/nexus/ssl:/opt/sonatype/nexus/conf/ssl
    - /volumes/nexus/work:/sonatype-work
    - /volumes/nexus/wrapper.conf:/opt/sonatype/nexus/bin/jsw/conf/wrapper.conf
-  container_name: binarynode
  
 qualitynode:
   image: "sonarqube:4.5.6"
   ports:
    - "19000:9000"
+  hostname: qualitynode
   container_name: qualitynode
+  environment:
+  - SONARQUBE_JDBC_URL=jdbc:mysql://sonardbnode:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
   volumes:
    - /volumes/sonar/data:/opt/sonarqube/data
    - /volumes/sonar/ssl:/opt/sonarqube/ssl
    - /volumes/sonar/conf:/opt/sonarqube/conf
    - /volumes/sonar/extensions:/opt/sonarqube/extensions
-  environment:
-  - SONARQUBE_JDBC_URL=jdbc:mysql://sonardbnode:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
   links:
   - sonardbnode
 
@@ -52,6 +55,7 @@ sonardbnode:
   image: "mysql:5.7"
   ports: 
    - "13306:3306"
+  hostname: sonardbnode
   container_name: sonardbnode
   volumes:
   - /volumes/sonar/mysql:/var/lib/mysql
@@ -61,6 +65,6 @@ deploynode:
   ports:
    - "14516:4516"
   hostname: deploynode
+  container_name: deploynode
   volumes:
    - /volumes/xldeploy:/ALMBOX
-  container_name: deploynode
