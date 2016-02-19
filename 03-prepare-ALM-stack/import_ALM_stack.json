@@ -1,0 +1,12 @@
+{
+    "id": "alm",
+    "cmd": "echo load ALM stack",
+    "cpus": 1.0,
+    "mem": 64.0,
+    "ports": [0,0,0],
+    "instances": 1,
+    "executor": "/tmp/mesos_executor.sh",
+    "labels": {
+        "fileName": "/tmp/03-prepare-ALM-stack.yml"
+    }
+}
