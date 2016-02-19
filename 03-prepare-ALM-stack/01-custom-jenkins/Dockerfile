@@ -20,3 +20,6 @@ RUN apt-get install -y docker-engine && \
 # GET BACK TO STANDARD USER
 USER jenkins
 
+# CREATE ALIAS TO HANDLE DOCKER COMMANDS DIRECTLY
+RUN echo "alias docker='sudo docker'" > ~/.bashrc
+
