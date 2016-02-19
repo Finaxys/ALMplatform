@@ -36,6 +36,7 @@ mesos_slave:
   - /cgroup:/cgroup:ro
   - /volumes/logs/mesos-slave_1-logs:/tmp/logs/slave_log
   - docker-compose-executor-0.0.1-SNAPSHOT-jar-with-dependencies.jar:/tmp/docker-compose-executor-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+  - mesos_executor.sh:/tmp/mesos_executor.sh
   command: "--launcher=posix"
   privileged: true
   container_name: mesos_slave
