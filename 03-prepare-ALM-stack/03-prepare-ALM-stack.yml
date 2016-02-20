@@ -1,3 +1,11 @@
+resolvable:
+  image: "mgood/resolvable"
+  hostname: resolvable
+  container_name: resolvable
+  volumes:
+   - /var/run/docker.sock:/tmp/docker.sock
+   - /etc/resolv.conf:/tmp/resolv.conf
+
 cinode:
   build: ./01-custom-jenkins
   ports:
@@ -13,10 +21,11 @@ cinode:
    - /var/run/docker.sock:/var/run/docker.sock
   privileged: true
   links:
-  - qualitynode
-  - sonardbnode
-  - binarynode
-  - deploynode
+   - resolvable
+   - qualitynode
+   - sonardbnode
+   - binarynode
+   - deploynode
 
 binarynode:
   image: "sonatype/nexus:2.11.2-06"
@@ -34,7 +43,9 @@ binarynode:
    - /volumes/nexus/ssl:/opt/sonatype/nexus/conf/ssl
    - /volumes/nexus/work:/sonatype-work
    - /volumes/nexus/wrapper.conf:/opt/sonatype/nexus/bin/jsw/conf/wrapper.conf
- 
+  links:
+   - resolvable
+
 qualitynode:
   image: "sonarqube:4.5.6"
   ports:
@@ -49,7 +60,8 @@ qualitynode:
    - /volumes/sonar/conf:/opt/sonarqube/conf
    - /volumes/sonar/extensions:/opt/sonarqube/extensions
   links:
-  - sonardbnode
+   - resolvable
+   - sonardbnode
 
 sonardbnode:
   image: "mysql:5.7"
@@ -58,7 +70,9 @@ sonardbnode:
   hostname: sonardbnode
   container_name: sonardbnode
   volumes:
-  - /volumes/sonar/mysql:/var/lib/mysql
+   - /volumes/sonar/mysql:/var/lib/mysql
+  links:
+   - resolvable
 
 deploynode:
   build: ./02-custom-xldeploy
@@ -68,3 +82,6 @@ deploynode:
   container_name: deploynode
   volumes:
    - /volumes/xldeploy:/ALMBOX
+  links:
+   - resolvable
+
