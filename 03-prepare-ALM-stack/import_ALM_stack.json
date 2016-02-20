@@ -1,9 +1,8 @@
 {
-    "id": "alm",
-    "cmd": "echo load ALM stack",
-    "cpus": 1.0,
-    "mem": 64.0,
-    "ports": [0,0,0],
+    "id": "alm-docker-compose",
+    "cmd": "echo ALM STACK",
+    "cpus": 4.0,
+    "mem": 8192.0,
     "instances": 1,
     "executor": "/tmp/mesos_executor.sh",
     "labels": {

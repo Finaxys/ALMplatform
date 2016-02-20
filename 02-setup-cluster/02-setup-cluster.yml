@@ -31,7 +31,8 @@ mesos_slave:
    - "8081:8081"
   volumes:
   - /var/run/docker.sock:/var/run/docker.sock
-  - /volumes/docker-1.6.2-client:/usr/bin/docker:ro
+  - /volumes/docker-1.6.2-client:/usr/bin/docker
+  - /usr/bin/docker-compose:/usr/bin/docker-compose
   - /sys:/sys:ro
   - /cgroup:/cgroup:ro
   - /volumes/logs/mesos-slave_1-logs:/tmp/logs/slave_log
