@@ -82,6 +82,7 @@ deploynode:
   container_name: deploynode
   volumes:
    - /volumes/xldeploy:/ALMBOX
+  privileged: true
   links:
    - resolvable
 

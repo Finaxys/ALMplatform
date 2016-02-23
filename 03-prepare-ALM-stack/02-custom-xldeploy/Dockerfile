@@ -4,7 +4,7 @@ FROM java:openjdk-7u65-jdk
 ENV DEBIAN_FRONTEND=noninteractive
 
 # update install and install required archives
-RUN apt-get update && apt-get install -y wget git curl zip nano bzip2 vim
+RUN apt-get update && apt-get install -y wget git curl zip nano bzip2 vim telnet ssh
 
 # remove downloaded archive files
 RUN apt-get clean
